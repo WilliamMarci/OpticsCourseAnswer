@@ -1,0 +1,89 @@
+\usepackage{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{paracol}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage[en-US]{datetime2}
+\usepackage{fancyhdr}
+\usepackage{footnote}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+
+\geometry{
+    left=20mm,
+    top=25.7mm,
+    bottom=25mm,
+    right=20mm,
+}
+
+% \ctexset{
+% abstractname = {Abstract}
+% section/titleformat = \raggedright 
+% }
+
+% \newenvironment{tblock}[1][Title]{\begin{tcolorbox}[title=\textbf{#1},colback=Twhite,colframe=Tblack,arc=0pt,outerarc=0pt]}{\end{tcolorbox}}
+\newenvironment{tblock}{\begin{tcolorbox}[colback=Twhite,colframe=Tblack,arc=0pt,outer arc=0pt, boxrule = 0.5 pt]}{\end{tcolorbox}}
+
+\definecolor{Tblack}{RGB}{1,1,1}
+\definecolor{Tdark}{RGB}{70,70,70}
+\definecolor{Tmain}{RGB}{20,20,20}
+\definecolor{Tgray}{RGB}{140,140,140}
+\definecolor{Tpurewhite}{RGB}{220,220,220}
+\definecolor{Twhite}{RGB}{250,250,250}
+
+\newcommand{\degree}{^\circ}
+\renewcommand{\figurename}{\textbf{Figure}}
+\renewcommand{\tablename}{\textbf{Table}}
+\renewcommand{\contentsname}{\textbf{Contents}}
+\renewcommand{\abstractname}{\textbf{Abstract}}
+
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}} 
+\renewcommand{\headrulewidth}{0.5pt}
+
+\newcommand{\HEADPAGE}{
+    \thispagestyle{empty}
+    \columnratio{0.7} 
+    \begin{paracol}{2}
+        % \begin{center}
+            %     \Large{SHINONOME LABORATORY}
+            % \end{center}
+        \begin{flushleft}
+            \begin{tabular}{l l}
+            \Large{REPORT}\\
+            % \rule{10em}{0.5pt}\\
+            \hline
+            \textsc{\EDITION}\\
+           \\     
+            \AUTHORS
+            \\
+            Create Date: \CRDATES\\
+            Lastest Update: \DATES\\
+            \end{tabular}
+        \end{flushleft}
+        \switchcolumn
+        \begin{flushright}
+            \includegraphics[height=25mm]{\LOGO}\\
+            %     \begin{tabular}{rl c}
+                %         \textbf{Class}:&bn\\
+                %         \textbf{Date}:&fgh\\
+                %     \end{tabular}
+            \large{\textsc{Shinonome INST}}\\
+        \end{flushright}
+    \end{paracol}
+    \begin{tblock}
+    \begin{center}
+        \ANNOUNCE
+    \end{center}
+    \end{tblock}
+
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyhead[R]{\textsc{\TITLE}\quad\(\mathnormal{\thepage}\)}
+        \fancyhead[L]{\textsc{\leftmark}}
+    % \fancyfoot[C]{-\ \thepage\ -}
+}

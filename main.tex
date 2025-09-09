@@ -1,0 +1,113 @@
+\documentclass[a4paper]{article}
+\usepackage{reporter}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\newcommand{\QUE}[1]{\noindent\boxed{\textbf{Question}} \textit{#1}\newline}
+\newcommand{\ANS}{\noindent\boxed{\textbf{Solution}}}
+\newcommand{\COM}[1]{\texttt{#1}}
+
+\newcommand{\TITLE}{Optics Course Answer}
+\newcommand{\DISCR}{The project about the Physics and other. Write your Describution about the title.}
+\newcommand{\EDITION}{Edition 1.0.0}
+\newcommand{\AUTHOR}{Youpeng Wu}
+\newcommand{\AUTHORS}{
+Youpeng Wu\\
+}
+\newcommand{\CRDATES}{\textsc{September 9, 2025}}
+\newcommand{\DATES}{\textsc{\today}}
+\newcommand{\LOGO}{figure/logo.png}
+\newcommand{\ANNOUNCE}{This work is licensed under a Creative Commons ``Attribution NonCommercial-ShareAlike 3.0 Unported'' license. }
+\begin{document}
+\HEADPAGE
+
+\begin{center}
+        \Large\textbf{\TITLE}\\
+        \vspace*{3mm}
+        \normalsize
+        \AUTHOR
+\end{center}
+\vspace*{5mm}
+\begin{abstract}
+        This is a unofficial answer for optics course in PKU 2025 autumn. This is only for learning and communication. If you have any question, please contact me.
+\end{abstract}
+
+\tableofcontents
+\newpage
+%正文
+\section{作业题目列表}
+
+\begin{table}[htbp]
+\caption{各章节题目编号}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}l|X@{}}
+\toprule
+章节 & 题目编号 \\
+\midrule
+第二章 几何光学基本原理 & 2.5, 2.8, 2.10, 2.16 \\
+\midrule
+第三章 光波衍射的标量波理论 & 
+第四节 圆孔、圆屏的费涅尔衍射：3.3, 3.4 \newline
+第五节 半边无限大屏的费涅尔衍射：3.9 \newline
+第六节 单缝、矩孔的夫琅禾费衍射：3.12 \newline
+第七节 圆孔的夫琅禾费衍射：3.10, 3.11 \newline
+第八节 其它形状孔的夫琅禾费衍射：3.17, 3.18 \\
+\midrule
+第四章 光波在介质界面的反射与折射 & 4.2, 4.3, 4.5, 4.6, 4.11 \\
+\midrule
+第五章 光波在晶体中的传播 & 
+第二节 光线速度与相速度：5.1, 5.2 \newline
+第三节 晶体双折射：5.7 \newline
+第四节 晶体光学器件：5.4, 5.5, 5.9 \newline
+第五节 旋光：5.10, 5.11 \\
+\midrule
+第六章 光场的空间相干性 & 6.1, 6.2, 6.6, 6.7, 6.9, 6.10 \\
+\midrule
+第七章 光场的时间相干性 & 7.3, 7.5, 7.7, 7.9 \\
+\midrule
+第八章 光场的偏振态 & 8.2, 8.7, 8.8, 8.11 \\
+\midrule
+第九章 成像系统 & 
+第一节 几种基本成像系统：9.1, 9.2, 9.7, 9.9 \newline
+第二节 望远镜：9.21, 9.25 \\
+\midrule
+第十章 干涉装置 & 
+第一节 分波前装置：10.1, 10.2, 10.3, 10.6 \newline
+第二节 薄膜干涉：10.11, 10.12, 10.13, 10.17 \newline
+第三节 多光束干涉与法布里－珀罗干涉仪：10.19, 10.20 \newline
+第四节 偏振光干涉：10.22 \newline
+第五节 李奥滤光器：10.23 \\
+\midrule
+第十一章 衍射光栅 & 
+第一节 光栅及其夫琅禾费衍射场：11.2, 11.4, 11.7 \newline
+第二节 光栅光谱仪：11.10 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{第二章答案}
+
+\QUE{2.5 试用费马原理证明通过旋转双曲面一个焦点的光线经旋转双曲面反射后，其反射延长线经过另一个焦点}
+
+\QUE{2.8 光线以入射角\(i\)从折射率为\(n_w\)的水中入射到折射率为\(n\)厚度为\(h\)的玻璃中, 玻璃的折射率大于水的折射率. 计算光线在玻璃中的光程\(L\)}
+
+\QUE{2.10 光线经折射率为\(n\)的球形水珠折射. 求折射后光线偏向角的最大值}
+
+\QUE{2.16 一个透明圆柱由厚度均匀的多层介质构成，各层介质均为圆筒状。已知由内向外各层介质的折射率和内半径分别为 \(n_l\) 和 \(r_l\)，其中 \(l=1,2,\ldots,m\)，光线在透明圆柱的截面内。求光线在各界面上的折射角 \(i_l\) 之间的关系。}
+
+\section{第三章答案}
+
+\QUE{3.3 一列光强为 \(I_0\)，波长为 \(589.3\,\mathrm{nm}\) 的平面单色光波垂直入射到衍射屏上，衍射屏的透光部分为一个内直径等于 \(0.5\,\mathrm{mm}\)，外直径等于 \(1.0\,\mathrm{mm}\) 的圆环。求距衍射屏 \(50\,\mathrm{cm}\) 处光轴上的光强。}
+
+\QUE{3.4 用波长为 \(632.8\,\mathrm{nm}\) 的平面单色光波垂直照射衍射屏，衍射屏的透光部分为一个圆孔。已知在衍射屏后方距衍射屏 \(2.0\,\mathrm{m}\)、\(1.0\,\mathrm{m}\)、\(0.67\,\mathrm{m}\)、\(0.50\,\mathrm{m}\)、\(0.40\,\mathrm{m}\) 等处光轴上的光强为 0。求圆孔的直径。}
+
+\QUE{3.9 波长为 \(650\,\mathrm{nm}\) 的平行光照射到一个刀片上。求刀片后方 \(20\,\mathrm{cm}\) 处的接收屏上最大光强出现的位置到刀片边缘几何投影的距离。}
+
+\QUE{3.10 光强为 \(I_0\)，波长为 \(\lambda\) 的平行光正入射到一个衍射屏上，衍射屏的透光部分是一个半径为 \(d\) 的圆孔，圆孔中嵌有折射率为 \(n\) 的玻璃，玻璃的背面刻有深度为 \(h\)、直径为 \(d\) 的浅槽。求衍射屏后方光轴上距衍射屏 \(b\) 处的光强，距离 \(b\) 满足条件 \(b^2 \gg d^2\)。}
+
+\QUE{3.11 实验室里光导轨长 \(2\,\mathrm{m}\)。用氦氖激光演示圆孔夫琅禾费衍射。求合适的圆孔直径。}
+
+\QUE{3.12}
+
+\end{document}
