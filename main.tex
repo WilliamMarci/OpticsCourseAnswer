@@ -2,12 +2,20 @@
 \usepackage{reporter}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
 
 \newcommand{\QUE}[1]{\noindent\boxed{\textbf{Question}} \textit{#1}\newline}
 \newcommand{\ANS}{\noindent\boxed{\textbf{Solution}}}
-\newcommand{\COM}[1]{\texttt{#1}}
+% \newcommand{\QUE}[1]{\noindent\boxed{\textbf{问　题}} \textit{#1}\newline}
+% \newcommand{\ANS}{\noindent\boxed{\textbf{解　答}}}
 
-\newcommand{\TITLE}{Optics Course Answer}
+\newcommand{\COM}[1]{\texttt{#1}}
+\newcommand{\QED}{\hfill\(\square\)\newline\hrule\vspace{3mm}}
+\newcommand{\END}{\vspace{3mm}\hrule\vspace{3mm}}
+
+
+\newcommand{\TITLE}{Optics Lecture Answer}
 \newcommand{\DISCR}{The project about the Physics and other. Write your Describution about the title.}
 \newcommand{\EDITION}{Edition 1.0.0}
 \newcommand{\AUTHOR}{Youpeng Wu}
@@ -29,7 +37,7 @@ Youpeng Wu\\
 \end{center}
 \vspace*{5mm}
 \begin{abstract}
-        This is a unofficial answer for optics course in PKU 2025 autumn. This is only for learning and communication. If you have any question, please contact me.
+        This is a unofficial answer for optics lecture in PKU 2025 autumn. This is only for learning and communication. If you have any question, please contact me.
 \end{abstract}
 
 \tableofcontents
@@ -85,16 +93,101 @@ Youpeng Wu\\
 \bottomrule
 \end{tabularx}
 \end{table}
+\newpage
 
 \section{第二章答案}
 
 \QUE{2.5 试用费马原理证明通过旋转双曲面一个焦点的光线经旋转双曲面反射后，其反射延长线经过另一个焦点}
 
+\ANS 
+
+要证明这个问题，由费马定理：光在两点间传播时，总是沿着光程为最小值的路径传播。我们构造这样一个证明: 对于从焦点 \(F_1\) 出发，经过旋转双曲面在点\(P\)反射后到达\(Q\)的光程, 在\(QP\)的延长线经过另一个焦点\(F_2\)时取得最小值。
+
+对于双曲面上的点\(P\), 有关系
+\[
+|PF_2|-|PF_1|=2a \to |PF_1|=|PF_2|-2a
+\]
+而光程为
+\[
+L=|PF_1|+|PQ|=|PF_2|+|PQ| -2a
+\]
+当光程取最小时, \(L\) 取最小值, 则此时\(P\), \(Q\), \(F_2\) 三点共线, 即光线的反射延长线经过另一个焦点\(F_2\).
+
+\QED
+
 \QUE{2.8 光线以入射角\(i\)从折射率为\(n_w\)的水中入射到折射率为\(n\)厚度为\(h\)的玻璃中, 玻璃的折射率大于水的折射率. 计算光线在玻璃中的光程\(L\)}
+
+\ANS
+
+进入玻璃后, 光线的折射角为:
+\[
+n \sin r = n_w \sin i \to \sin r = \frac{n_w}{n} \sin i
+\]
+设光线在玻璃中的传播距离为\(d\), 则有:
+\[
+h = d \cos r \to d = \frac{h}{\cos r} = \frac{h}{\sqrt{1-\sin^2 r}} = \frac{h}{\sqrt{1-\left(\frac{n_w}{n}\sin i\right)^2}}
+\]
+光程为:
+\[
+L = n d = \frac{n h}{\sqrt{1-\left(\frac{n_w}{n}\sin i\right)^2}}= \frac{n^2 h}{\sqrt{n^2 - n_w^2 \sin^2 i}}
+\]
+
+\END
 
 \QUE{2.10 光线经折射率为\(n\)的球形水珠折射. 求折射后光线偏向角的最大值}
 
+\ANS
+
+光线进入水珠后会发生两次折射, 设入射角为\(\alpha\), 折射角为\(\beta\). 则有:
+\[
+\sin \alpha = n \sin \beta \to \beta = \arcsin \frac{\sin \alpha}{n}
+\]
+光线偏向角\(\theta\)为:
+\[
+\theta = 2(\alpha - \beta) = 2\alpha - 2 \arcsin \frac{\sin \alpha}{n}
+\]
+对\(\alpha\)求导:
+\[
+\frac{d\theta}{d\alpha} = 2 - \frac{2 \cos \alpha}{n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2}} = 0
+\to 2 = \frac{2 \cos \alpha}{n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2}}
+\to n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2} =  \cos \alpha
+\]
+当\(\alpha=\pi/2\)时, \(\theta\) 取得最大值:
+\[
+\theta_{max} = \pi - 2 \arcsin \frac{1}{n}
+\]
+
+\begin{minipage}[c]{0.4\textwidth}
+    \centering
+    \input{figure/figure2.10.1.tex}
+\end{minipage}
+\begin{minipage}[c]{0.55\textwidth}
+\textbf{球内多次反射}\newline
+\COM{
+如图所示, 在入射光线-球心平面上, 光线入射角为\(\alpha\), 折射角为\(\beta\). 当入射光线掠射入射时(沿切线方向), 入射角\(\alpha = \frac{\pi}{2}\), 此时折射角达到其最大值\(\beta_{max}=\arcsin \frac{1}{n}\), 即全反射角. 由于球的性质, 光线在球内的入射角也为\(\beta < \beta_{max}\).  所以对于一个理想的球形, 不会发生全反射, 此时光线射出. 从对称性的角度考虑会更加容易. \newline
+但是如果不在几何光学的条件下, 在小于全反射角的入射角下, 还是有部分光线会发生反射, 这时就会有多次反射的情况发生.
+}
+\end{minipage}
+
+\END
+
 \QUE{2.16 一个透明圆柱由厚度均匀的多层介质构成，各层介质均为圆筒状。已知由内向外各层介质的折射率和内半径分别为 \(n_l\) 和 \(r_l\)，其中 \(l=1,2,\ldots,m\)，光线在透明圆柱的截面内。求光线在各界面上的折射角 \(i_l\) 之间的关系。}
+
+\ANS
+
+光线在各层介质中的传播满足光线微分方程:
+\[
+\frac{d^2 \vec{r}}{d\tau^2}=n\nabla n
+\]
+由于这是一个柱对称的系统, 所以满足角动量守恒, 定义质量为1的粒子在各层介质中的角动量为:
+\[
+n_lr_l \sin i_l = \text{Const.} \quad (l=1,2,\ldots,m)
+\]
+所以此时:
+\[
+n_l r_l \sin i_l = n_k r_k \sin i_k = \text{Const.} \quad (l,k=1,2,\ldots,m)
+\]
+
 
 \section{第三章答案}
 
@@ -109,5 +202,10 @@ Youpeng Wu\\
 \QUE{3.11 实验室里光导轨长 \(2\,\mathrm{m}\)。用氦氖激光演示圆孔夫琅禾费衍射。求合适的圆孔直径。}
 
 \QUE{3.12 使波长为 \(589.3\,\mathrm{nm}\) 的平行光正入射到宽度为 \(0.10\,\mathrm{mm}\) 的狭缝上，接收屏到狭缝距离为 \(2.0\,\mathrm{m}\)。求接收屏上零级衍射斑的宽度。}
+
+\QUE{3.17 在一个夫琅禾费衍射装置中，接收透镜的焦距为 \(F\)，光源的波长为 \(\lambda\)，衍射屏上的开孔为两个对角线长度分别为 \(a\) 和 \(b\) 的菱形，求衍射场的光强分布。}
+
+\QUE{3.18 在一个夫琅禾费衍射装置中，接收透镜的焦距为 \(F\)，光源的波长为 \(\lambda\)，衍射屏上的开孔为长短半轴分别为 \(a\) 和 \(b\) 的椭圆，求衍射场的光强分布。}
+
 
 \end{document}
