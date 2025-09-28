@@ -1,0 +1,331 @@
+\ProvidesPackage{collegeBeamer}
+
+% required packages
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\RequirePackage{listings}
+\RequirePackage{graphicx}
+\RequirePackage{geometry}
+\RequirePackage{amsfonts, amsmath, bm, oldgerm, lmodern}  % math
+\RequirePackage{verbatim}
+\RequirePackage{animate}
+\RequirePackage{xcolor}
+\RequirePackage{ifplatform}
+
+% --- package options ---
+% languages
+\newcommand{\tocStr}{Table of Contents}
+\newcommand{\qaStr}{\textsl{Thank you for listening! \\ Your feedback will be highly appreciated!}}
+
+\DeclareOption{en}{
+    \renewcommand{\tocStr}{Table of Contents}
+    \renewcommand{\qaStr}{\textsl{Thank you for listening! \\ Your feedback will be highly appreciated!}}
+}
+
+\newif\ifcollegebeamer@zh
+
+% Chinese option
+\DeclareOption{zh}{%
+  \collegebeamer@zhtrue
+  \AtEndOfPackage{%
+    \RequirePackage{ifxetex}
+    \RequirePackage{xeCJK}
+    
+    % os specific font setting
+    \ifwindows
+        \setCJKmainfont{Noto Serif CJK SC}
+    \fi
+    \ifmacosx
+        \setCJKmainfont{Noto Serif CJK SC}
+    \fi
+    \iflinux
+        \setCJKmainfont{Noto Serif CJK SC}
+    \fi
+
+    \renewcommand{\tocStr}{Contents}
+    \renewcommand{\qaStr}{\textit{Imagination is more important than knowledge.}}
+    \ifxetex
+    \else
+      \PackageError{collegeBeamer}{请使用 XeLaTeX 编译此模板！}{}
+    \fi
+  }
+}
+
+% colleges & institutes
+\newcommand{\maincolorRGB}{10,10,10}
+\newcommand{\colorlogoPath}{src/PKU/color-logo-black.png}
+\newcommand{\translogoPath}{src/PKU/trans-logo.png}
+\newcommand{\backgroundPath}{src/PKU/background.png}
+
+
+\ProcessOptions\relax
+
+% --- typeset & elements settings ---
+% force 16:9 aspect ratio
+\geometry{paperwidth=16cm,paperheight=10cm}
+
+% logo
+\pgfdeclareimage[width=0.07\paperwidth]{colorlogo}{\colorlogoPath}
+\pgfdeclareimage[width=0.07\paperwidth]{translogo}{\translogoPath}
+\newcommand{\@makelogo}{colorlogo}
+
+
+\setbeamertemplate{headline}{\hspace{0.06\textwidth}\pgfuseimage{\@makelogo}} % put the logo in each slide's top left area
+
+% color
+\definecolor{maincolor}{RGB}{\maincolorRGB}
+\definecolor{airforceblue}{rgb}{0.76, 0.33, 0.33}
+\definecolor{morelightgray}{rgb}{0.9, 0.9, 0.9}
+
+\newcommand{\themecolor}[1]{
+    \ifstrequal{#1}{colorbg}{
+        \renewcommand{\@makelogo}{translogo}
+        \setbeamercolor{normal text}{fg=white, bg=maincolor}
+        \setbeamercolor{structure}{fg=white}
+    }{
+        \ifstrequal{#1}{emptybg}{
+            \setbeamertemplate{headline}{} % 移除logo
+            \setbeamercolor{normal text}{fg=darkgray, bg=white}
+            \setbeamercolor{structure}{fg=maincolor}
+        }{
+            \renewcommand{\@makelogo}{colorlogo}
+            \setbeamercolor{normal text}{fg=darkgray, bg=white}
+            \setbeamercolor{structure}{fg=maincolor}
+        }
+    }
+}
+\themecolor{white} % default: white theme
+% P.S. Beamer colors should be set in the preamble. It often works fine in the document itself, but NOT for normal text foreground. Thus \themecolor should only be called from the preamble
+
+\setbeamercolor{title}{fg=maincolor}
+\setbeamercolor{alerted text}{fg=maincolor}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{date}{fg=black}
+
+% font
+% \renewcommand{\familydefault}{\sfdefault}  % sans-serif
+\usefonttheme{serif}
+
+\AtEndOfPackage{%
+  \ifcollegebeamer@zh
+    \setbeamerfont{title}{series=\bfseries, size=\Large}
+  \else
+    \setbeamerfont{title}{series=\scshape, size=\Large}
+  \fi
+}
+
+\setbeamerfont{subtitle}{series=\mdseries, size=\normalsize}
+\setbeamerfont{author}{size=\normalsize}
+\setbeamerfont{date}{size=\normalsize}
+
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{framesubtitle}{series=\mdseries}
+\setbeamerfont{footline}{size=\scriptsize}
+
+% no navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% footline
+\newcommand{\@footlinepayoff}{\@SINTEFmotto}
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\textwidth, ht=5mm, dp=3mm, rightskip=1cm]{footline}
+    \usebeamerfont{footline}\hfill\@footlinepayoff
+    \end{beamercolorbox}
+}
+
+\newcommand{\footlinecolor}[1]{
+    % if #1 is empty, makes footline transparent
+    \ifstrempty{#1}{
+        \renewcommand{\@footlinepayoff}{}
+        \setbeamercolor{footline}{bg=}
+    }{
+        \renewcommand{\@footlinepayoff}{\@SINTEFmotto}
+        \setbeamercolor{footline}{fg=white, bg=#1}
+    }
+}
+\footlinecolor{} % default: no footline
+
+% block
+\setbeamertemplate{blocks}[rounded]
+\setbeamerfont{block title}{series=\centering, size=\small}
+\setbeamerfont{block body}{size=\scriptsize}
+\setbeamercolor{block title}{fg=airforceblue, bg=morelightgray}
+\setbeamercolor{block body}{fg=darkgray, bg=morelightgray}
+
+% bullets
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{\textemdash}
+\setbeamertemplate{itemize subsubitem}{\ensuremath{\circ}}
+
+% table of cotents
+\setbeamertemplate{section in toc}{$\blacktriangleright$~\inserttocsection}  % section name format
+\setbeamertemplate{subsection in toc}{}  % don't present subsection
+
+% code bolck setting
+\definecolor{codegreen}{RGB}{101,218,120}
+\definecolor{darkgreen}{RGB}{93,158,82}
+\definecolor{darkyellow}{RGB}{245,194,105}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{airforceblue},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    xleftmargin=10pt,
+    xrightmargin=10pt,
+}
+
+\lstset{style=mystyle}
+
+% --- section & frame setting ---
+% subsection
+\newcommand{\strsubsec}{Section \thesection.\thesubsection}
+
+% presents subtitle on each frame
+\makeatletter
+    \pretocmd\beamer@checkframetitle{\framesubtitle{\thesection \, \secname}}
+\makeatother
+
+% avoid numbering of frames that are breaked into multiply slides
+\setbeamertemplate{frametitle continuation}{}
+
+% section page with the current section highlighted
+\AtBeginSection[]
+{
+    \begingroup
+    \setbeamertemplate{footline}{}
+    \themecolor{colorbg}
+    \begin{frame}{\tocStr}
+        \tableofcontents[currentsection]
+    \end{frame}
+    \endgroup
+}
+
+% subsection title page
+\AtBeginSubsection[]
+{
+    \begin{frame}{\,}{\thesection \, \secname}
+        \fontfamily{ptm}\selectfont
+        \centering\textsl{\textbf{\textcolor{maincolor}{
+            \large Section \thesection.\thesubsection
+            \vskip15pt
+            \LARGE \subsecname
+        }}}
+    \end{frame}
+}
+
+% --- page elements ---
+% frame title & subtitle layout
+\setbeamertemplate{frametitle}{
+    \vspace*{-3.5ex}
+    % \vspace*{1ex}
+    % \begin{beamercolorbox}[leftskip=2cm]{frametitle}
+    \begin{beamercolorbox}[leftskip=1.5cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\\
+    % \usebeamerfont{framesubtitle}\insertframesubtitle
+    \usebeamerfont{framesubtitle}\vspace{4mm}
+    \end{beamercolorbox}
+}
+
+% title page
+\setbeamertemplate{title page}{
+    \hspace{-12mm}  % pull back the box in an inelegant way - but it works!
+    \begin{beamercolorbox}[wd=1.15\textwidth, sep=10pt, leftskip=20mm]{title}
+        {
+        \vspace*{15mm}\\
+        \usebeamerfont{title}\Huge{\inserttitle}}\\
+        \vskip5pt{\usebeamerfont{subtitle}\insertsubtitle}\\
+        \vspace*{15mm}
+        \vskip5pt{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}\\
+        \vskip3pt{Peking University \hfill\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}
+    \end{beamercolorbox}
+}
+
+\renewcommand{\maketitle}{
+    \begingroup
+        \setbeamertemplate{footline}{}
+        \setbeamertemplate{background}{
+            \includegraphics[height=\paperheight]{\backgroundPath}
+        }
+        \begin{frame}
+            \titlepage
+        \end{frame}
+    \endgroup
+}
+
+% Q&A page
+\newcommand{\QApage}{
+    \themecolor{colorbg}
+    \begingroup
+        \setbeamertemplate{footline}{}
+        
+        \begin{frame}{}
+            \centering
+            \begin{minipage}{\textwidth}
+                \usebeamercolor[fg]{normal text}
+                \centering
+                \Huge $$\mathcal Q \& \mathcal A$$
+                \tiny \qaStr
+            \end{minipage}
+        \end{frame}
+    \endgroup
+}
+
+% bibliography page
+\newcommand{\bibliographpage}{
+    \section{References}
+
+    \begingroup
+    \themecolor{colorbg}
+    \begin{frame}[allowframebreaks]{References}{\,}
+        \tiny
+        \printbibliography[heading=none]
+    \end{frame}
+\endgroup
+}
+
+% --- commands ---
+% set colored hyperlinks command
+\newcommand{\bhref}[2]{\textcolor{airforceblue}{\href{#1}{#2}}}
+
+% centering paragraph statement
+\newcommand{\centerstate}[1]{
+    \centering
+    \begin{columns}
+        \begin{column}{0.8\textwidth}
+            #1
+        \end{column}
+    \end{columns}
+}
+
+\newcommand{\tbf}[1]{\texttt{\textcolor{airforceblue}{[#1]}}}
+
+% coloured textbf
+\newcommand{\ctextbf}[1]{\textbf{\textcolor{maincolor}{#1}}}
+\newcommand{\btextbf}[1]{\textbf{\textcolor{airforceblue}{#1}}}
+
+% coloured textsl
+\newcommand{\ctextsl}[1]{\textsl{\textcolor{maincolor}{#1}}}
+\newcommand{\btextsl}[1]{\textsl{\textcolor{airforceblue}{#1}}}
+
+% coloured emph
+\newcommand{\cemph}[1]{\emph{\textcolor{maincolor}{#1}}}
+\newcommand{\bemph}[1]{\emph{\textcolor{airforceblue}{#1}}}
+
+% coloured texttt
+\newcommand{\ctexttt}[1]{\texttt{\textcolor{maincolor}{#1}}}
+\newcommand{\btexttt}[1]{\texttt{\textcolor{airforceblue}{#1}}}

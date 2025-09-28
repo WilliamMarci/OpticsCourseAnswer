@@ -1,0 +1,258 @@
+\documentclass{beamer}
+\usepackage{amsmath,amssymb}
+\usepackage{mathrsfs}  % for \mathscr
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}   %列表
+\setlist[enumerate]{itemsep=1pt,topsep=0pt,parsep=1pt }
+\setlist[itemize]{itemsep=1pt,topsep=0pt,parsep=1pt, label=\textbullet}
+% === collegeBeamer.sty options 可用选项 ===
+%
+% --- University/Institute Options 大学/机构 ---
+% --- Language Options 语言 ---
+% [en]     % English, pls compile with pdflLaTeX 英语，请使用 pdflLaTeX 编译
+% [zh]     % Chinese, automatically loads xeCJK and Chinese fonts, pls compile with XeLaTeX 中文，自动加载 xeCJK 包和中文字体，请使用 XeLaTeX 编译
+%
+% --- Example Usage ---
+\usepackage[zh]{collegeBeamer}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc} 
+
+% user-defined commands
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\QUE}[1]{\noindent\boxed{\textbf{Question}} \textit{#1}\newline}
+\newcommand{\ANS}{\noindent\boxed{\textbf{Solution}}\vspace{1mm}}
+% \newcommand{\QUE}[1]{\noindent\boxed{\textbf{问　题}} \textit{#1}\newline}
+% \newcommand{\ANS}{\noindent\boxed{\textbf{解　答}}\vspace{1mm}}
+
+\newcommand{\COM}[1]{\texttt{#1}}
+\newcommand{\QED}{\hfill\(\square\)}
+\newcommand{\END}{\vspace{3mm}\hrule\vspace{3mm}}
+
+% meta-data
+\title{光学\ 习题课}
+\subtitle{\textbf{第一次作业} Optics Lecture - $1^{\rm st}$ Homework}
+\author{\textit{吴友鹏} \ \ \tiny (Youpeng Wu)}
+\date{Sep 30, 2025}
+
+% document body
+\begin{document}
+    
+\maketitle
+
+\begin{frame}{作业题目列表}
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}l|X@{}}
+\toprule
+章节 & 题目编号 \\
+\midrule
+第二章 几何光学基本原理 & 2.5, 2.8, 2.10, 2.16 \\
+\midrule
+第三章 光波衍射的标量波理论 & 
+第四节 圆孔、圆屏的费涅尔衍射：3.3, 3.4 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\end{frame}
+
+\section{第二章 几何光学基本原理\\ Chapter 2 Geometrical Optics Fundamentals}
+
+% \themecolor{emptybg} 
+\begin{frame}{Chapter 2}
+\QUE{2.5 试用费马原理证明通过旋转双曲面一个焦点的光线经旋转双曲面反射后，其反射延长线经过另一个焦点}
+
+\ANS 
+
+由费马定理：光在两点间传播时，总是沿着光程为最小值的路径传播。我们构造这样一个证明: 对于从焦点 \(F_1\) 出发，经过旋转双曲面在点\(P\)反射后到达\(Q\)的光程, 在\(QP\)的延长线经过另一个焦点\(F_2\)时取得最小值。
+
+对于双曲面上的点\(P\), 有关系
+\[
+|PF_2|-|PF_1|=2a \to |PF_1|=|PF_2|-2a
+\]
+而光程为
+\[
+L=|PF_1|+|PQ|=|PF_2|+|PQ| -2a
+\]
+当光程取最小时, \(L\) 取最小值, 则此时\(P\), \(Q\), \(F_2\) 三点共线, 即光线的反射延长线经过另一个焦点\(F_2\).
+
+\QED
+
+\end{frame}
+
+
+\begin{frame}{Chapter 2}
+
+\fbox{\begin{minipage}[c]{\textwidth}
+    \setlength{\fboxsep}{0pt}%
+    \setlength{\fboxrule}{0.5pt}%
+    \centering
+    \input{figure/figure2.5.1.tex}
+\end{minipage}}
+
+\end{frame}
+
+\begin{frame}{Chapter 2}
+\QUE{2.8 光线以入射角\(i\)从折射率为\(n_w\)的水中入射到折射率为\(n\)厚度为\(h\)的玻璃中, 玻璃的折射率大于水的折射率. 计算光线在玻璃中的光程\(L\)}
+
+\ANS
+
+进入玻璃后, 光线的折射角为:
+\[
+n \sin r = n_w \sin i \to \sin r = \frac{n_w}{n} \sin i
+\]
+设光线在玻璃中的传播距离为\(d\), 则有:
+\[
+h = d \cos r \to d = \frac{h}{\cos r} = \frac{h}{\sqrt{1-\sin^2 r}} = \frac{h}{\sqrt{1-\left(\frac{n_w}{n}\sin i\right)^2}}
+\]
+光程为:
+\[
+L = n d = \frac{n h}{\sqrt{1-\left(\frac{n_w}{n}\sin i\right)^2}}= \frac{n^2 h}{\sqrt{n^2 - n_w^2 \sin^2 i}}
+\]
+\end{frame}
+
+\begin{frame}{Chapter 2}
+
+\QUE{2.10 光线经折射率为\(n\)的球形水珠折射. 求折射后光线偏向角的最大值}
+
+\ANS
+
+光线进入水珠后会发生两次折射, 设入射角为\(\alpha\), 折射角为\(\beta\). 则有:
+\[
+\sin \alpha = n \sin \beta \to \beta = \arcsin \frac{\sin \alpha}{n}
+\]
+光线偏向角\(\theta\)为:
+\[
+\theta = 2(\alpha - \beta) = 2\alpha - 2 \arcsin \frac{\sin \alpha}{n}
+\]
+对\(\alpha\)求导:
+\[
+\frac{d\theta}{d\alpha} = 2 - \frac{2 \cos \alpha}{n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2}} = 0
+\to 2 = \frac{2 \cos \alpha}{n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2}}
+\to n \sqrt{1-\left(\frac{\sin \alpha}{n}\right)^2} =  \cos \alpha
+\]
+\end{frame}
+\begin{frame}{Chapter 2}
+当\(\alpha=\pi/2\)时, \(\theta\) 取得最大值:
+\[
+\theta_{max} = \pi - 2 \arcsin \frac{1}{n}
+\]
+\begin{minipage}[c]{0.4\textwidth}
+    \centering
+    \input{figure/figure2.10.1.tex}
+\end{minipage}
+\begin{minipage}[c]{0.55\textwidth}
+\textbf{球内多次反射}\newline
+\COM{
+如图所示, 在入射光线-球心平面上, 光线入射角为\(\alpha\), 折射角为\(\beta\). 当入射光线掠射入射时(沿切线方向), 入射角\(\alpha = \frac{\pi}{2}\), 此时折射角达到其最大值\(\beta_{max}=\arcsin \frac{1}{n}\), 即全反射角. 由于球的性质, 光线在球内的入射角也为\(\beta < \beta_{max}\).  所以对于一个理想的球形, 不会发生全反射, 此时光线射出. 从对称性的角度考虑会更加容易. \newline \pause
+但是如果不在几何光学的条件下, 在小于全反射角的入射角下, 还是有部分光线会发生反射, 这时就会有多次反射的情况发生.
+}
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Chapter 2}
+    
+\QUE{2.16 一个透明圆柱由厚度均匀的多层介质构成，各层介质均为圆筒状。已知由内向外各层介质的折射率和内半径分别为 \(n_l\) 和 \(r_l\)，其中 \(l=1,2,\ldots,m\)，光线在透明圆柱的截面内。求光线在各界面上的折射角 \(i_l\) 之间的关系。}
+
+\ANS
+
+光线在各层介质中的传播满足光线微分方程:
+\[
+\frac{d^2 \vec{r}}{d\tau^2}=n\nabla n
+\]
+由于这是一个柱对称的系统, 所以满足角动量守恒, 定义质量为1的粒子在各层介质中的角动量为:
+\[
+n_lr_l \sin i_l = \text{Const.} \quad (l=1,2,\ldots,m)
+\]
+所以此时:
+\[
+n_l r_l \sin i_l = n_k r_k \sin i_k = \text{Const.} \quad (l,k=1,2,\ldots,m)
+\]
+\end{frame}
+
+\section{第三章 光波衍射的标量波理论\\ Chapter 3 Scalar Theory of Optical Diffraction}
+
+\begin{frame}{Chapter 3}
+    
+    \QUE{3.3 一列光强为 \(I_0\)，波长为 \(589.3\,\mathrm{nm}\) 的平面单色光波垂直入射到衍射屏上，衍射屏的透光部分为一个内直径等于 \(0.5\,\mathrm{mm}\)，外直径等于 \(1.0\,\mathrm{mm}\) 的圆环。求距衍射屏 \(50\,\mathrm{cm}\) 处光轴上的光强。}
+    
+    \ANS 
+    
+    \begin{minipage}[c]{0.68\textwidth}
+    分别计算圆孔中心-圆环内缘、圆环中心-圆环外缘的相位差:
+        \begin{itemize}
+            \item 圆孔中心-圆环内缘: \(\displaystyle \delta_1 = \frac{2\pi}{\lambda}\frac{d^2_1}{8b}=\frac{\pi d_1^2}{4\lambda b}\)
+            \item 圆环中心-圆环外缘: \(\displaystyle \delta_2 = \frac{2\pi}{\lambda}\frac{d^2_2}{8b}=\frac{\pi d_2^2}{4\lambda b}\)
+        \end{itemize}
+    其中\(d_1=0.5\,\mathrm{mm}\), \(d_2=1.0\,\mathrm{mm}\), \(b=50\,\mathrm{cm}\), \(\lambda=589.3\,\mathrm{nm}\). 用矢量图得到待测广场的振幅:
+    \[
+    A=2A_0 \sin \left(\frac{\delta_2-\delta_1}{2} \right)
+    \]
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \input{figure/figure3.3.1.tex}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Chapter 3}
+则观测点的光强为:
+\[
+I = |A|^2 = 4 I_0 \sin^2 \left(\frac{\delta_2-\delta_1}{2} \right) =4I_0 \sin^2 \left[\frac{\pi (d_2^2 - d_1^2)}{8\lambda b} \right]
+\]
+带入值可以得到:
+\[
+I=4I_0 \sin^2\left[\frac{\pi(d^2_2 - d^2_1)}{8\lambda b}\right] \approx 2.8 I_0
+\]
+\[
+\text{Where} \quad d_1=0.5\,\mathrm{mm}, \quad d_2=1.0\,\mathrm{mm}, \quad b=50\,\mathrm{cm}, \quad \lambda=589.3\,\mathrm{nm}
+\]
+\end{frame}
+
+
+\begin{frame}{Chapter 3}
+
+\noindent\boxed{\textbf{Solution 2}}\vspace{1mm}
+
+我们可以使用积分进行计算, \(P\)为光轴屏上点, 
+
+\begin{align*}
+    \tilde{U}(P) &=\frac{-i}{\lambda }\iint_{\Sigma} \tilde{U}_0 \frac{\exp(ik r)}{z} \dd S \\
+    &=\frac{-i}{\lambda z}\int_{r_1}^{r_2} \tilde{U}_0 \exp(ik \sqrt{z^2 + \rho^2}) 2\pi \rho \dd\rho \\
+    &=\frac{-i}{\lambda z} 2\pi \left. e^{i k \sqrt{z^2 + \rho^2}} (\frac{1}{k^2}-\frac{i\sqrt{z^2-\rho^2}}{k})\right|_{r_1}^{r_2}  
+\end{align*}
+带入数值波长\(\lambda=589.3\,\mathrm{nm}\), 光屏距离\(z=50\,\mathrm{cm}\), 内外径\(r_1=0.25\,\mathrm{mm}\), \(r_2=0.5\,\mathrm{mm}\), 光强\(I_0\)与\(\tilde{U}_0\)的关系为\(I_0 =|\tilde{U}_0|^2\), 则有:
+\[
+|\tilde{U}(P)| ^2 \approx 2.80705 I_0
+\]
+
+\end{frame}
+\begin{frame}{Chapter 3}
+
+\fbox{
+\begin{minipage}[c]{\textwidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figure/q3_3_diffraction_pattern.pdf}
+    \end{figure}
+    \[
+    \tilde{U}(P) =\frac{-i}{\lambda }\iint_{\Sigma_0} \tilde{U}_0(\mathbf{r_0})\left[\frac{1}{2}(\cos \theta +\cos \theta_0)\right] \frac{\exp(ik|\mathbf{r}-\mathbf{r_0}|)}{|\mathbf{r}-\mathbf{r_0}|} \dd s_0
+    \]
+\end{minipage}
+}
+
+\end{frame}
+
+
+\begin{frame}{Chapter 3}
+    
+    \QUE{3.4 用波长为 \(632.8\,\mathrm{nm}\) 的平面单色光波垂直照射衍射屏，衍射屏的透光部分为一个圆孔。已知在衍射屏后方距衍射屏 \(2.0\,\mathrm{m}\)、\(1.0\,\mathrm{m}\)、\(0.67\,\mathrm{m}\)、\(0.50\,\mathrm{m}\)、\(0.40\,\mathrm{m}\) 等处光轴上的光强为 0。求圆孔的直径。}
+
+    \ANS 
+
+\end{frame}
+\QApage
+        
+\end{document}
